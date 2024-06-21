@@ -3,6 +3,7 @@ import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
+import http from 'http';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import morgan from 'morgan';
@@ -17,11 +18,13 @@ export class App {
   public app: express.Application;
   public env: string;
   public port: string | number;
+  public server: http.Server;
 
   constructor(routes: Routes[]) {
     this.app = express();
+    this.server = http.createServer(this.app);
     this.env = NODE_ENV || 'development';
-    this.port = PORT || 3000;
+    this.port = PORT || 8585;
 
     this.initializeMiddlewares();
     this.initializeRoutes(routes);
@@ -30,7 +33,7 @@ export class App {
   }
 
   public listen() {
-    this.app.listen(this.port, () => {
+    this.server.listen(this.port, () => {
       logger.info(`=================================`);
       logger.info(`======= ENV: ${this.env} =======`);
       logger.info(`🚀 App listening on the port ${this.port}`);
@@ -39,7 +42,13 @@ export class App {
   }
 
   public getServer() {
-    return this.app;
+    return this.server;
+  }
+
+  public initializeSocket() {
+    const io = require('socket.io')(this.server);
+    logger.info('======== Notre socket est bien configuré ==========');
+    return io;
   }
 
   private initializeMiddlewares() {
