@@ -46,7 +46,11 @@ export class App {
   }
 
   public initializeSocket() {
-    const io = require('socket.io')(this.server);
+    const io = require('socket.io')(this.server, {
+      cors: {
+        origin: ['http://localhost:3000'],
+      },
+    });
     logger.info('======== Notre socket est bien configuré ==========');
     return io;
   }
