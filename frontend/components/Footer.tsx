@@ -1,5 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
+import { Shrikhand } from "next/font/google";
+
+const shrikhand = Shrikhand({
+    weight: "400",
+    subsets: ["latin"],
+    variable: "--font-shrikhand"
+});
+  
 
 const Footer = () => {
 
@@ -25,7 +33,7 @@ const Footer = () => {
 
     return (
         <footer className='bg-black text-white w-full flex flex-col justify-center items-center'>
-            <h3>ohmyfood</h3>
+            <h3 className={`${shrikhand.className}`}>ohmyfood</h3>
 
             <ul>
                 {urlFooter.map((link) => {

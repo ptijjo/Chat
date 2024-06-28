@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "./QueryProvider";
-import Footer from "@/components/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-roboto"
+});
 
 export const metadata: Metadata = {
   title: "Service de commande en restaurant",
@@ -18,12 +21,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <QueryProvider>
-        <body className="flex flex-col justify-center items-center max-w-7xl min-h-dvh m-auto border">
+      <body className={`flex flex-col justify-center items-center max-w-7xl min-h-dvh m-auto border ${roboto.className} bg-fond`}>
+        <QueryProvider>
           {children}
-          <Footer/>
-        </body>
-      </QueryProvider>
+        </QueryProvider>
+      </body>
     </html>
   );
 }

@@ -4,10 +4,11 @@ import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import Image from 'next/image';
 
+
 export default function Home() {
   return (
     <>
-      <Image src="/images/logo/ohmyfood.png" alt='logo' width={150} height={150} priority className="py-2.5"/>
+      <Image src="/images/logo/ohmyfood.png" alt='logo' width={150} height={150} priority className="py-2.5" />
       <main className="flex flex-col flex-grow max-w-7xl w-full justify-center items-center">
         <Login />
 
